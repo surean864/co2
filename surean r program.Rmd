@@ -1,0 +1,40 @@
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+str(CO2)
+head(CO2)
+summary(CO2)
+```
+```{r}
+missing_values <- sapply(CO2, function(x) sum(is.na(x)))
+print(missing_values)
+```
+```{r}
+# Visualize the data
+# Histogram for numerical variables
+num_vars <- sapply(CO2, is.numeric)
+num_data <- CO2[, num_vars]
+```
+
+```{r}
+# boxplot
+ggplot(CO2, aes(x =Type, y =conc)) +
+  geom_boxplot(fill = "orange", color = "black") +
+  theme_minimal() +
+  labs(title = "Boxplot of Humidity by Season", x= "type", y= "conc")
+```
+```{r}
+# Scatter plot to show the relationship between two numeric variables (replace 'type' and 'conc' with appropriate column names)
+ggplot(CO2, aes(x = Type, y = conc)) +
+  geom_point(color = "red") +
+  theme_minimal() +
+  labs(title = "Scatter Plot of type vs conc", x = "type", y = "conc")
+```
+```{r}
+# Time series plot for a variable over time (replace 'date' and 'temp' with appropriate column names)
+ggplot(CO2, aes(x = Type , y = conc)) +
+  geom_line(color = "blue") +
+  theme_minimal() +
+  labs(title = "co2", x = "type", y = "conc")
+```
